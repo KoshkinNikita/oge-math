@@ -16,10 +16,12 @@ export function TeacherGuide({ guide }: { guide: GuideData }) {
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
-    if (!supabase) return;
-    supabase.auth.getSession().then(({ data }) => {
+    const client = supabase; // <-- сохраняем в локальную переменную
+    if (!client) return;
+
+    client.auth.getSession().then(({ data }) => {
       if (data.session) {
-        supabase
+        client // <-- используем client вместо supabase
           .from("profiles")
           .select("role")
           .eq("id", data.session.user.id)
