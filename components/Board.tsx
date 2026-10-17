@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "../lib/supabase";
+import type { RealtimeChannel } from "@supabase/supabase-js";
 
 export function Board({ roomId }: { roomId: string }) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -16,8 +17,7 @@ export function Board({ roomId }: { roomId: string }) {
   const [size, setSize] = useState(3);
   const [connected, setConnected] = useState(false);
 
-  const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null);
-
+  const channelRef = useRef<RealtimeChannel | null>(null);
   useEffect(() => {
     const client = supabase;
     if (!client) return;

@@ -5,6 +5,7 @@ import type { Session } from "@supabase/supabase-js";
 import { LoginScreen } from "../components/LoginScreen";
 import { supabase } from "../lib/supabase";
 import { lessonCatalog } from "../lib/lesson-catalog";
+import type { RealtimeChannel } from "@supabase/supabase-js";
 
 type Role = "student" | "teacher";
 type Page =
@@ -93,7 +94,7 @@ function Board() {
   const [connected, setConnected] = useState(false);
 
   // Ссылка на канал Supabase
-  const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null);
+  const channelRef = useRef<RealtimeChannel | null>(null);
 
   useEffect(() => {
     const client = supabase;
